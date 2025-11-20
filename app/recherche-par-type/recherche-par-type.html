@@ -32,8 +32,9 @@
                             <td>{{game.dateCreation | date:'dd/MM/yyyy'}}</td>
                             <td>{{game.type?.nomType||"-"}}</td>
                             <td>{{game.email}}</td>
+                            @if(authService.isAdmin()) {
                             <td><a class="btn btn-danger" (click)="supprimerGame(game)">Supprimer</a></td>
-                            <td><a class="btn btn-success" [routerLink]="['/updateGame',game.idGame]">Modifier</a></td>
+                            <td><a class="btn btn-success" [routerLink]="['/updateGame',game.idGame]">Modifier</a></td>}
                         </tr>
                     </tbody>
                     }

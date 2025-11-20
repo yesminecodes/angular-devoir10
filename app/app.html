@@ -38,7 +38,7 @@ data-bs-toggle="dropdown" aria-expanded="false">
             @if(!authService.isloggedIn){ 
             <li><a class="dropdown-item" routerLink="/login">Login</a></li> }
             @else{
-            <li><a class="dropdown-item" href="#">Logout</a></li> }
+            <li><a class="dropdown-item" routerLink="/logout">Logout</a></li> }
             <li><a class="dropdown-item" href="#">Profile</a></li> 
           </ul> 
         </li> 

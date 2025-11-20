@@ -5,6 +5,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Type } from '../model/type.model';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-recherche-par-type',
@@ -18,7 +19,7 @@ export class RechercheParType implements OnInit {
   types!: Type[];
   allGames!: Game[];
   searchTerm!: string;
-  constructor(private gameService: GameService) {
+  constructor(private gameService: GameService,public authService: AuthService) {
 
   }
   ngOnInit(): void {

@@ -5,6 +5,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SearchFilterPipe } from '../search-filter-pipe';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class RechercheParNom implements OnInit {
   allgames!: Game[];
   searchTerm!: string;
   IdType!: number;
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService,public authService: AuthService) { }
    ngOnInit(): void {
     this.allgames= this.gameService.listeGames();
     this.games=this.gameService.listeGames();
