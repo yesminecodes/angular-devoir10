@@ -1,28 +1,39 @@
 <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
-        <div class="container">
-            <div class="card shadow mb-4">
-                <div class="card-body">
-                    <app-update-type [type]="updatedType" (typeUpdated)="typeUpdated($event)" [ajout]="ajout">  </app-update-type>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Nom Catégorie</th>
-                            </tr>
-                        </thead>
-                        @for(type of types; track type.idType)
-                        {
-                        <tbody>
-                            <tr>
-                                <td>{{type.idType}}</td>
-                                <td>{{type.nomType}}</td>
-                                <td><a class="btn btn-success" (click)="updateCat(type)">Editer</a></td>
-                            </tr>
-                            
-                        </tbody>
-                        }
-                    </table>
-                </div>
-            </div>
+  <div class="container">
+    <div class="card shadow mb-4">
+      <div class="card-body">
+
+        <div *ngIf="!ajout">
+          <app-update-type 
+            [type]="updatedType" 
+            (typeUpdated)="typeUpdated($event)" 
+            [ajout]="ajout">
+          </app-update-type>
         </div>
+
+        <div *ngIf="ajout" class="mb-3">
+          <input [(ngModel)]="newType.nomType" placeholder="Nom du type" class="form-control mb-2"/>
+          <button class="btn btn-success" (click)="ajouterType()">Ajouter</button>
+        </div>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nom Catégorie</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let type of types; trackBy: trackById">
+            <tr>
+              <td>{{ type.idType }}</td>
+              <td>{{ type.nomType }}</td>
+              <td><a class="btn btn-success" (click)="updateCat(type)">Editer</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
 </div>

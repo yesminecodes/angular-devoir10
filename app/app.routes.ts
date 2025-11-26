@@ -18,8 +18,8 @@ export const routes: Routes = [
   { path: "", redirectTo: "games", pathMatch: "full" },
   { path: "updateGame/:id", component: UpdateGame },
   { path: "rechercheParType", component: RechercheParType },
-  { path: "rechercheParNom", component: RechercheParNom },
+  { path: "rechercheParNom", component: RechercheParNom},
   {path:  'app-forbidden', component: Forbidden},
-  {path: "listeTypes", component : ListeType},
+  {path: "listeTypes", component : ListeType,canActivate: [gameGuard] },
 ];
 

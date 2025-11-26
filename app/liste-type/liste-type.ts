@@ -3,34 +3,48 @@ import { Type } from '../model/type.model';
 import { GameService } from '../services/game.service';
 import { CommonModule } from '@angular/common';
 import { UpdateType } from "../update-type/update-type";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-liste-type',
-  imports: [CommonModule, UpdateType],
+  imports: [CommonModule, UpdateType,FormsModule],
   templateUrl: './liste-type.html',
   styles: ``
 })
 export class ListeType {
   types?: Type[];
-  ajout:boolean=true;
+  ajout: boolean = true;
+  updatedType: Type = { idType: 0, nomType: "" };
+  newType: Type = { idType: 0, nomType: "" };
+
   constructor(private gameService: GameService) { }
+
   ngOnInit(): void {
-    const result = this.gameService.listeTypes();
-    this.types = result;
-    console.log(result);
+    this.chargerTypes();
   }
-  updatedType: Type = { "idType": 0, "nomType": "" };
-  typeUpdated(t: Type) {
-    console.log("Type mis à jour :", t);
-    this.gameService.updateType(t);
-    this.chargerTypes();  }
+
   chargerTypes() {
-    const result = this.gameService.listeTypes();
-    this.types = result;
-    console.log(result);
+    this.types = this.gameService.listeTypes();
   }
+
+  typeUpdated(t: Type) {
+    this.gameService.updateType(t);
+    this.chargerTypes();
+  }
+
   updateCat(cat: Type) {
-  this.updatedType = cat;
-  this.ajout=false;
-}
+    this.updatedType = { ...cat };
+    this.ajout = false;
+  }
+
+  ajouterType() {
+    if (this.newType.nomType.trim() === "") return;
+    this.gameService.ajouterType(this.newType);
+    this.newType = { idType: 0, nomType: "" };
+    this.chargerTypes();
+  }
+
+  trackById(index: number, type: Type) {
+    return type.idType;
+  }
 }

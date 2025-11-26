@@ -89,5 +89,8 @@ updateType(t: Type) {
     this.type[index] = t;
   }
 }
-
+ ajouterType(t: Type) {
+    t.idType = this.type.length + 1; // simple auto-increment
+    this.type.push({...t});
+  }
 }
